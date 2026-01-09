@@ -1,36 +1,23 @@
-// const list = "vanilla, strawberry, chocolate, chocolate"
-
 const flavors = prompt(
   "Please enter some (comma-separated) froyo flavors:",
-  "vanilla, strawberry, chocolate, chocolate")
+  "vanilla, vanilla, vanilla, strawberry, coffee, coffee"
+);
 
-const flavorsArray = flavors.split(",");
+const flavorsArr = flavors.split(",");
+const cleanArr = flavorsArr.map((flavor) => flavor.trim());
 
-function froyoOrders(flavorsArray) {
+function flavorsCount(cleanArr) {
   const counts = {};
 
-  for (let i = 0; i < flavorsArray.length; i++) {
-    const cleanArray = flavorsArray[i].trim().toLowerCase();
-
-    if (counts[cleanArray] === undefined) {
-      counts[cleanArray] = 1
+  for (const flavor of cleanArr) {
+    if (flavor in counts) {
+      counts[flavor] += 1;
+    } else {
+      counts[flavor] = 1;
     }
-    else {
-      counts[cleanArray] += 1;
-    }
+    return counts;
   }
-  return counts;
 }
+const counts = flavorsCount(cleanArr);
 
-console.log()
-// ).split(",").map(flavor => flavor.trim());
-
-// froyoOrders.counts = {}
-
-// for (let flavor of froyoOrders.flavors) {
-//   if (froyoOrders.counts[flavor]) {
-//     froyoOrders.counts[flavor] += 1
-//   }
-// }
-
-// console.log(list)
+console.table(counts);
